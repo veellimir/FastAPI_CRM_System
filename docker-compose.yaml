@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_docker_container
+    env_file:
+      - .env-non-dev
+    ports:
+      - 5432:5432
