@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
-from users.router import router as user_router
-from tasks.router import router as task_router
+from app.users.router import router as user_router
+from app.tasks.router import router as task_router
 
 app = FastAPI(
     title='CRM_system'
