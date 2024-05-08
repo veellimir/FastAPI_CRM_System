@@ -1,7 +1,7 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
-from app.database import Base
+from database import Base
 
 
 class Roles(Base):
@@ -10,6 +10,7 @@ class Roles(Base):
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(String, nullable=False)
     user = relationship('Users', back_populates='role')
+    user_id = Column(Integer, ForeignKey('users.id'))
 
     def __str__(self):
         return f"Роль {self.name}"

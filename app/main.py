@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 
+from users.router import router as user_router
+
 app = FastAPI(
     title='CRM_system'
 )
 
 
-@app.get('/новый проект')
-def hello():
-    return 'start project'
+app.include_router(user_router)
+
