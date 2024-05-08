@@ -3,12 +3,11 @@ from datetime import datetime
 from fastapi import Request, Depends
 from jose import jwt, JWTError
 
-from config import SECRET_KEY, ALGORITHM
-from users.dao import UsersDAO
-from users.models import Users
+from app.config import SECRET_KEY, ALGORITHM
+from app.users.dao import UsersDAO
 
 
-from exeptions import (
+from app.exeptions import (
     TokenAbsentException,
     IncorrectTokenFormatExeption,
     TokenExpireException,

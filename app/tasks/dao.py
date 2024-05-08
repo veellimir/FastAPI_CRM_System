@@ -1,7 +1,7 @@
-from repository.base import BaseDAO
-from database import async_session_maker
+from app.repository.base import BaseDAO
+from app.database import async_session_maker
 
-from tasks.models import Tasks
+from app.tasks.models import Tasks
 
 from datetime import date
 

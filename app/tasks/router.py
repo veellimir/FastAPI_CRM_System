@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 
-from tasks.dao import TaskDAO
-from users.dependecies import current_user
-from users.models import Users
-from exeptions import TokenAbsentException
+from app.tasks.dao import TaskDAO
+from app.users.dependecies import current_user
+from app.users.models import Users
+from app.exeptions import TokenAbsentException
 
 from datetime import date
 

@@ -2,12 +2,12 @@ from typing import List
 
 from fastapi import APIRouter, Response, Depends
 
-from users.schemes import SUserAuth, SGetUser
-from users.dao import UsersDAO
-from users.auth import get_password_hashed, authenticated_user, create_access_token
-from users.models import Users
-from users.dependecies import current_user
-from exeptions import UserAlreadyExistsException, IncorrectEmailOrPswException
+from app.users.schemes import SUserAuth, SGetUser
+from app.users.dao import UsersDAO
+from app.users.auth import get_password_hashed, authenticated_user, create_access_token
+from app.users.models import Users
+from app.users.dependecies import current_user
+from app.exeptions import UserAlreadyExistsException, IncorrectEmailOrPswException
 
 router = APIRouter(
     prefix="/users",
