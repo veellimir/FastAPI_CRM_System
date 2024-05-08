@@ -23,6 +23,7 @@ class Users(Base):
     email = Column(String, nullable=False)
     hashed_password = Column(String, nullable=False)
     role = relationship("Roles", back_populates="user")
+    tasks = relationship("Tasks", back_populates='user')
 
     def __str__(self):
         return f"Пользователь {self.email}"
