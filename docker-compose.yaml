@@ -2,9 +2,32 @@ version: "3.7"
 
 services:
   db:
-    image: postgres:15
-    container_name: postgres_docker_container
+    image: postgres:16
+    container_name: crm_db
     env_file:
       - .env-non-dev
+    environment:
+      - POSTGRES_DB=crm_system_db
     ports:
       - 5432:5432
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+
+  crm:
+    image: crm_image
+    build:
+      context: .
+    container_name: crm_app
+    env_file:
+      - .env-non-dev
+    depends_on:
+      - db
+#    command: ["/crm/docker/app.sh"]
+    command: >
+      sh -c "alembic upgrade head && gunicorn app.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000"
+
+    ports:
+      - 9000:8000
+
+volumes:
+  postgresdata:
