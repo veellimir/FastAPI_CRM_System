@@ -16,11 +16,12 @@ router = APIRouter(
 @router.post("/add/task")
 async def add_task(
         name_task: str,
-        description: str,
         date_create: date,
         deadline: date,
+        description: str = None,
+        user_id: int = None,
 ):
-    task = await TaskDAO.add(name_task, description, date_create, deadline)
+    task = await TaskDAO.add(user_id, name_task, description, date_create, deadline)
     return task
 
 
@@ -33,10 +34,10 @@ async def get_all_tasks(users: Users = Depends(current_user)):
 
 
 @router.get(
-    "/get_task/user/{user_id}",
-    summary="получить список задач пользователя"
+    "/get_task/user",
+    summary="получить список задач текущего пользователя"
 )
-async def get_task_current_user(user_id: int, Users = Depends(current_user)):
-    if not user_id:
+async def get_task_current_user(user: Users = Depends(current_user)):
+    if not user:
         raise TokenAbsentException
-    return await TaskDAO.find_by_id(user_id)
+    return await TaskDAO.find_all(user_id=user.id)
