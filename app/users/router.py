@@ -39,7 +39,7 @@ async def login_user(response: Response, user_data: SUserAuth):
 
     access_token = create_access_token({"sub": str(user.id)})
     response.set_cookie("crm_system_access_token", access_token, httponly=True)
-    return f"Вы {user.email} вошли в систему"
+    return f"Вы вошли в систему, текущий токен: {access_token}"
 
 
 @router.post("/logout", summary="выйти")

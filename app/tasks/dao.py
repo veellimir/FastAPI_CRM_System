@@ -2,10 +2,11 @@ from app.repository.base import BaseDAO
 from app.database import async_session_maker
 
 from app.tasks.models import Tasks
+from app.users.models import Users
 
 from datetime import date
 
-from sqlalchemy import insert
+from sqlalchemy import insert, select
 
 
 class TaskDAO(BaseDAO):
@@ -14,6 +15,7 @@ class TaskDAO(BaseDAO):
     @classmethod
     async def add(
             cls,
+            user_id: int,
             name_task: str,
             description: str,
             date_create: date,
@@ -23,6 +25,7 @@ class TaskDAO(BaseDAO):
             new_task = (
                 insert(Tasks)
                 .values(
+                    user_id=user_id,
                     name_task=name_task,
                     description=description,
                     date_create=date_create,
