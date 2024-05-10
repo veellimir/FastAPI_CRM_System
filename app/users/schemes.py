@@ -8,4 +8,6 @@ class SUserAuth(BaseModel):
 
 class SGetUser(BaseModel):
     id: int
+    role_id: int
     email: str
+

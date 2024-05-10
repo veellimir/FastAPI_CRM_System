@@ -29,3 +29,8 @@ IncorrectTokenFormatExeption = HTTPException(
 UserNotPresentException = HTTPException(
     status_code=status.HTTP_401_UNAUTHORIZED
 )
+
+RoleAlreadyExistsException = HTTPException(
+    status_code=status.HTTP_409_CONFLICT,
+    detail="Роль c таким названием уже существует"
+)
