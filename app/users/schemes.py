@@ -1,5 +1,7 @@
 from pydantic import BaseModel, EmailStr
 
+from typing import Optional
+
 
 class SUserAuth(BaseModel):
     email: EmailStr
@@ -8,6 +10,6 @@ class SUserAuth(BaseModel):
 
 class SGetUser(BaseModel):
     id: int
-    role_id: int
+    role_id: Optional[int]
     email: str
 
