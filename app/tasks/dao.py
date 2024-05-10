@@ -1,12 +1,11 @@
+from datetime import date
+
+from sqlalchemy import insert
+
 from app.repository.base import BaseDAO
 from app.database import async_session_maker
 
 from app.tasks.models import Tasks
-from app.users.models import Users
-
-from datetime import date
-
-from sqlalchemy import insert, select
 
 
 class TaskDAO(BaseDAO):
