@@ -28,3 +28,4 @@ class RoleDAO(BaseDAO):
         async with async_session_maker() as session:
             result = await session.execute(select(Roles).where(Roles.name == name))
             return result.scalar_one_or_none()
+

@@ -21,13 +21,13 @@ router = APIRouter(
     "/create_role",
     summary="создать роль",
 )
-async def create_role(name: str):
+async def create_role(name: str, users: Users = Depends(current_user)):
     existing_role = await RoleDAO.find_one_by_name(name)
     if existing_role:
         raise RoleAlreadyExistsException
 
     role = await RoleDAO.add(name)
-    return role
+    return f"Роль: {name} создана"
 
 
 @router.get(
