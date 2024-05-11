@@ -21,6 +21,7 @@ class Users(Base):
     id = Column(Integer, primary_key=True, nullable=False)
     email = Column(String, nullable=False)
     hashed_password = Column(String, nullable=False)
+    user_image = Column(String)
     role_id = Column(Integer, ForeignKey(Roles.id))
     role = relationship("Roles", back_populates="user")
     tasks = relationship("Tasks", back_populates='user')

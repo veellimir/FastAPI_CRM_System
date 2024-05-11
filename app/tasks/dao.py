@@ -61,13 +61,3 @@ class TaskDAO(BaseDAO):
             update_task = await session.execute(task)
             await session.commit()
             return update_task.scalars()
-
-    @classmethod
-    async def del_task(cls, task_id: int):
-        async with async_session_maker() as session:
-            async with session.begin():
-                await session.execute(
-                    delete(Tasks)
-                    .where(Tasks.id == task_id)
-                )
-            await session.commit()

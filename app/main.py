@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.users.router import router as users_router
+from app.users.router import router as auth_router
+from app.users_data.router import router as users_router
 from app.roles.router import router as roles_router
 from app.tasks.router import router as tasks_router
 
@@ -25,6 +26,7 @@ app.add_middleware(
     allow_headers=["Content-type", "Set-Cookie", "Access-Control-Allow-Headers", "Access-Authorization"]
 )
 
+app.include_router(auth_router)
 app.include_router(users_router)
 app.include_router(roles_router)
 app.include_router(tasks_router)

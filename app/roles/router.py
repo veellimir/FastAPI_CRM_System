@@ -30,6 +30,18 @@ async def create_role(name: str, users: Users = Depends(current_user)):
     return f"Роль: {name} создана"
 
 
+@router.delete(
+    "/delete_role{role_id}",
+    summary="удалить роль"
+)
+async def delete_role(
+        role_id: int,
+        users: Users = Depends(current_user)
+):
+    role = await RoleDAO.delete(role_id)
+    return "Роль удалена"
+
+
 @router.get(
     "/get_list_roles",
     summary="получить список ролей",

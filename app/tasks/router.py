@@ -15,7 +15,7 @@ router = APIRouter(
 
 
 @router.post(
-    "/task/add_task{name_task}/{date_create}/{deadline}",
+    "/task/add_task/{name_task}/{date_create}/{deadline}",
     summary="создать задачу",
 
 )
@@ -32,7 +32,7 @@ async def add_task(
 
 
 @router.patch(
-    "/task/edit_task{task_id}",
+    "/task/edit_task/{task_id}",
     summary="редактировать задачу"
 )
 async def edit_task(
@@ -48,11 +48,11 @@ async def edit_task(
 
 
 @router.delete(
-    "/del_task{task_id}",
+    "/del_task/{task_id}",
     summary="удалить задачу"
 )
-async def delete_task(task_id: int):
-    task = await TaskDAO.del_task(task_id)
+async def delete_task(task_id: int, users: Users = Depends(current_user)):
+    task = await TaskDAO.delete(task_id)
     return f"Задача удалена"
 
 
@@ -65,7 +65,7 @@ async def get_all_tasks(users: Users = Depends(current_user)):
 
 
 @router.get(
-    "/get_task/user",
+    "/get_task/current_user",
     summary="получить список задач текущего пользователя"
 )
 async def get_task_current_user(user: Users = Depends(current_user)):
