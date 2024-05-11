@@ -76,9 +76,9 @@ async def get_task_current_user(user: Users = Depends(current_user)):
 
 
 @router.get(
-    "/project{prod_id}",
+    "/project{project_id}",
     summary="получить список задач по проекту"
 )
-async def get_task_project(prod_id: int):
-    project = await ProjectDAO.find_by_id(prod_id)
+async def get_task_project(project_id: int):
+    project = await TaskDAO.find_by_id(project_id)
     return project

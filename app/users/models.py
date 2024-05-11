@@ -29,5 +29,10 @@ class Users(Base):
     role = relationship("Roles", back_populates="user")
     tasks = relationship("Tasks", back_populates='user')
 
+    projects = relationship(
+        "ProjectUserAssociation",
+        back_populates="users"
+    )
+
     def __str__(self):
         return f"Пользователь {self.email}"

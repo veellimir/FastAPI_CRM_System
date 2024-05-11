@@ -9,7 +9,7 @@ class Tasks(Base):
 
     id = Column(Integer, primary_key=True)
     user_id = Column(ForeignKey("users.id"))
-    prod_id = Column(ForeignKey("projects.id"))
+    project_id = Column(ForeignKey("projects.id"))
 
     name_task = Column(String(100), nullable=False)
     description = Column(String)

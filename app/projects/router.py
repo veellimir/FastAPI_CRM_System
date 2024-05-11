@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 
-from app.projects.dao import ProjectDAO
+from app.projects.dao import ProjectDAO, ProjectUserDAO
 
 from app.users.dependecies import current_user
 from app.users.models import Users
@@ -25,6 +25,8 @@ async def all_projects(users: Users = Depends(current_user)):
     summary="получить проекты пользователя"
 )
 async def get_project_id(user_id: int):
-    project = await ProjectDAO.find_by_id(user_id)
-    return project
+    projects = await ProjectUserDAO.find_projects_by_user_id(user_id)
+    return projects
+
+
 
