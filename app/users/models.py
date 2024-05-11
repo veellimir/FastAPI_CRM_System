@@ -1,6 +1,8 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
+from app.projects.models import Projects
+
 from app.database import Base
 
 
@@ -23,6 +25,7 @@ class Users(Base):
     hashed_password = Column(String, nullable=False)
     user_image = Column(String)
     role_id = Column(Integer, ForeignKey(Roles.id))
+
     role = relationship("Roles", back_populates="user")
     tasks = relationship("Tasks", back_populates='user')
 

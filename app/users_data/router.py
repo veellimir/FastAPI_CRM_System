@@ -17,7 +17,7 @@ router = APIRouter(
 
 
 @router.get(
-    "/get_all_users",
+    "/all",
     summary="получить список пользователей",
     response_model=List[SGetUser]
 )
@@ -27,7 +27,7 @@ async def get_all_users(users: Users = Depends(current_user)):
 
 
 @router.get(
-    "/get_current_user",
+    "/current",
     summary="получить текущего пользователя"
 )
 async def get_current_user(user: Users = Depends(current_user)):

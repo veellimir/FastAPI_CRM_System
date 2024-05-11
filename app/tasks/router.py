@@ -3,6 +3,7 @@ from datetime import date
 from fastapi import APIRouter, Depends
 
 from app.tasks.dao import TaskDAO
+from app.projects.dao import ProjectDAO
 from app.users.dependecies import current_user
 from app.users.models import Users
 
@@ -15,7 +16,7 @@ router = APIRouter(
 
 
 @router.post(
-    "/task/add_task/{name_task}/{date_create}/{deadline}",
+    "/create/{name_task}/{date_create}/{deadline}",
     summary="создать задачу",
 
 )
@@ -32,7 +33,7 @@ async def add_task(
 
 
 @router.patch(
-    "/task/edit_task/{task_id}",
+    "/edit/{task_id}",
     summary="редактировать задачу"
 )
 async def edit_task(
@@ -48,7 +49,7 @@ async def edit_task(
 
 
 @router.delete(
-    "/del_task/{task_id}",
+    "/delete/{task_id}",
     summary="удалить задачу"
 )
 async def delete_task(task_id: int, users: Users = Depends(current_user)):
@@ -57,7 +58,7 @@ async def delete_task(task_id: int, users: Users = Depends(current_user)):
 
 
 @router.get(
-    "/all_task",
+    "/all",
     summary="получить список всех задач"
 )
 async def get_all_tasks(users: Users = Depends(current_user)):
@@ -65,10 +66,19 @@ async def get_all_tasks(users: Users = Depends(current_user)):
 
 
 @router.get(
-    "/get_task/current_user",
+    "/current_user",
     summary="получить список задач текущего пользователя"
 )
 async def get_task_current_user(user: Users = Depends(current_user)):
     if not user:
         raise TokenAbsentException
     return await TaskDAO.find_all(user_id=user.id)
+
+
+@router.get(
+    "/project{prod_id}",
+    summary="получить список задач по проекту"
+)
+async def get_task_project(prod_id: int):
+    project = await ProjectDAO.find_by_id(prod_id)
+    return project
