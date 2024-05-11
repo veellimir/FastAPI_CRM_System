@@ -13,6 +13,7 @@ sys.path.insert(0, dirname(dirname(dirname(abspath(__file__)))))
 from app.database import Base, DATABASE_URL
 from app.users.models import Users, Roles
 from app.tasks.models import Tasks
+from app.projects.models import Projects
 
 
 config = context.config

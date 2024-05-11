@@ -1,7 +1,6 @@
 from datetime import date
-from typing import Optional
 
-from sqlalchemy import insert, update, delete
+from sqlalchemy import insert, update
 
 from app.repository.base import BaseDAO
 from app.database import async_session_maker

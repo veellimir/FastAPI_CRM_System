@@ -18,7 +18,7 @@ router = APIRouter(
 
 
 @router.post(
-    "/create_role",
+    "/create",
     summary="создать роль",
 )
 async def create_role(name: str, users: Users = Depends(current_user)):
@@ -31,7 +31,7 @@ async def create_role(name: str, users: Users = Depends(current_user)):
 
 
 @router.delete(
-    "/delete_role{role_id}",
+    "/delete{role_id}",
     summary="удалить роль"
 )
 async def delete_role(
@@ -43,7 +43,7 @@ async def delete_role(
 
 
 @router.get(
-    "/get_list_roles",
+    "/all",
     summary="получить список ролей",
     response_model=List[SGetRole]
 )
