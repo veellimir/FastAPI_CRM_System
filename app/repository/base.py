@@ -1,6 +1,7 @@
 from sqlalchemy import select, insert, delete
 
 from app.database import async_session_maker
+from app.projects.models import ProjectUserAssociation, Projects
 
 
 class BaseDAO:
@@ -40,3 +41,5 @@ class BaseDAO:
             query = delete(cls.model).filter_by(id=model_id)
             await session.execute(query)
             await session.commit()
+
+
