@@ -12,27 +12,29 @@ from app.config import SECRET_KEY, ALGORITHM
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
-def get_password_hashed(psw: str) -> str:
-    return pwd_context.hash(psw)
+def get_password_hashed(password: str) -> str:
+    return pwd_context.hash(password)
 
 
-def verify_password(plain_psw, hashed_psw) -> bool:
-    return pwd_context.verify(plain_psw, hashed_psw)
+def verify_password(plain_password, hashed_password) -> bool:
+    return pwd_context.verify(plain_password, hashed_password)
 
 
 def create_access_token(data: dict) -> str:
     to_encode = data.copy()
     expire = datetime.utcnow() + timedelta(minutes=30)
     to_encode.update({'exp': expire})
+
     encode_jwt = jwt.encode(
         to_encode, SECRET_KEY, ALGORITHM
     )
     return encode_jwt
 
 
-async def authenticated_user(email: EmailStr, psw: str):
-    user = await UsersDAO.find_one_or_none(email=email)
+async def authenticated_user(email: EmailStr, password: str):
+    user = await UsersDAO.find_one_or_none_users(email=email)
 
-    if not user and verify_password(psw, user.password):
+    if user and verify_password(password, user.hashed_password):
+        return user
+    else:
         return None
-    return user

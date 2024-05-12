@@ -32,6 +32,7 @@ async def register_user(user_data: SUserAuth):
 @router.post("/login", summary="войти")
 async def login_user(response: Response, user_data: SUserAuth):
     user = await authenticated_user(user_data.email, user_data.password)
+    print(user_data.password)
 
     if not user:
         raise IncorrectEmailOrPswException
