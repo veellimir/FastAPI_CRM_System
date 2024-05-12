@@ -28,7 +28,14 @@ async def add_task(
         user_id: int = None,
         users: Users = Depends(current_user)
 ):
-    task = await TaskDAO.add(name_task, description, date_create, deadline, user_id)
+    task_data = {
+        "name_task": name_task,
+        "description": description,
+        "date_create": date_create,
+        "deadline": deadline,
+        "user_id": user_id
+    }
+    task = await TaskDAO.add_kwargs(**task_data)
     return f"Задача: {name_task} создана"
 
 

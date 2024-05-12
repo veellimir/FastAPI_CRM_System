@@ -11,30 +11,30 @@ from app.tasks.models import Tasks
 class TaskDAO(BaseDAO):
     model = Tasks
 
-    @classmethod
-    async def add(
-            cls,
-            name_task: str,
-            description: str,
-            date_create: date,
-            deadline: date,
-            user_id: int = None,
-    ):
-        async with async_session_maker() as session:
-            new_task = (
-                insert(Tasks)
-                .values(
-                    name_task=name_task,
-                    description=description,
-                    date_create=date_create,
-                    deadline=deadline,
-                    user_id=user_id,
-                )
-                .returning(Tasks)
-            )
-            add_new_task = await session.execute(new_task)
-            await session.commit()
-            return add_new_task.scalars()
+    # @classmethod
+    # async def add(
+    #         cls,
+    #         name_task: str,
+    #         description: str,
+    #         date_create: date,
+    #         deadline: date,
+    #         user_id: int = None,
+    # ):
+    #     async with async_session_maker() as session:
+    #         new_task = (
+    #             insert(Tasks)
+    #             .values(
+    #                 name_task=name_task,
+    #                 description=description,
+    #                 date_create=date_create,
+    #                 deadline=deadline,
+    #                 user_id=user_id,
+    #             )
+    #             .returning(Tasks)
+    #         )
+    #         add_new_task = await session.execute(new_task)
+    #         await session.commit()
+    #         return add_new_task.scalars()
 
     @classmethod
     async def update_task(

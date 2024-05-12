@@ -36,6 +36,14 @@ class BaseDAO:
             await session.commit()
 
     @classmethod
+    async def add_kwargs(cls, **data):
+        async with async_session_maker() as session:
+            query = insert(cls.model).values(**data).returning(cls.model)
+            result = await session.execute(query)
+            await session.commit()
+            return result.scalars()
+
+    @classmethod
     async def delete(cls, model_id: int):
         async with async_session_maker() as session:
             query = delete(cls.model).filter_by(id=model_id)
