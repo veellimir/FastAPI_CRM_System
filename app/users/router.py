@@ -35,7 +35,7 @@ async def register_user(response: Response, user_data: SUserReg):
     access_token = await login_user_and_set_cookie(
         response, user_data.email, user_data.password
     )
-    return f"Пользователь {user_data.email} успешно зарегистрирован"
+    return access_token
 
 
 @router.post("/login", summary="войти")
