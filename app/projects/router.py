@@ -18,7 +18,13 @@ router = APIRouter(
     summary="создать проект"
 )
 async def create_project(name: str, description: str, date_create: date):
-    project = await ProjectDAO.add_project(name, description, date_create)
+    project_data = {
+        "name": name,
+        "description": description,
+        "date_create": date_create
+    }
+    project = await ProjectDAO.add_project(**project_data)
+    return f"Проект: {name} создан"
 
 
 @router.get(
