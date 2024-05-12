@@ -6,3 +6,4 @@ asyncpg
 gunicorn
 python-jose
 passlib
+pytest

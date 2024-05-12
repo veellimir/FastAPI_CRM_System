@@ -1,0 +1,12 @@
+[
+  {
+    "email": "pavel@example.com",
+    "username": "pavel",
+    "hashed_password": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZXhwIjoxNzE1NTM4NDk1fQ.YEigw323Phib7Oa8_qsCpX89IDfmtmZFqH3W56iPCY0"
+  },
+   {
+    "email": "atmdi@example.com",
+    "username": "atmdi",
+    "hashed_password": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZXhwIjoxNzE1NTM4NDk1fQ.YEigw323Phib7Oa8_qsCpX89IDfmtmZFqH3B57iPCY0"
+  }
+]
