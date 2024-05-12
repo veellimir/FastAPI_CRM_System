@@ -7,7 +7,7 @@ from app.config import SECRET_KEY, ALGORITHM
 from app.users.dao import UsersDAO
 
 
-from app.exeptions import (
+from app.exceptions import (
     TokenAbsentException,
     IncorrectTokenFormatExeption,
     TokenExpireException,

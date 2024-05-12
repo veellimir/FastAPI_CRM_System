@@ -8,7 +8,7 @@ from app.users.models import Users
 
 from app.users.dependecies import current_user
 
-from app.exeptions import RoleAlreadyExistsException
+from app.exceptions import RoleAlreadyExistsException
 
 
 router = APIRouter(

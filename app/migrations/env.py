@@ -11,10 +11,10 @@ from os.path import abspath, dirname
 sys.path.insert(0, dirname(dirname(dirname(abspath(__file__)))))
 
 from app.database import Base, DATABASE_URL
+
 from app.users.models import Users, Roles
 from app.tasks.models import Tasks
 from app.projects.models import Projects, ProjectUserAssociation
-
 
 
 config = context.config

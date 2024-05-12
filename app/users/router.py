@@ -5,7 +5,7 @@ from app.users.dao import UsersDAO
 
 from app.users.auth import get_password_hashed, authenticated_user, login_user_and_set_cookie
 
-from app.exeptions import UserAlreadyExistsException, IncorrectEmailOrPswException
+from app.exceptions import UserAlreadyExistsException, IncorrectEmailOrPswException
 
 
 router = APIRouter(
@@ -19,7 +19,7 @@ router = APIRouter(
     summary="регистрация пользователя"
 )
 async def register_user(response: Response, user_data: SUserReg):
-    existing_user = await UsersDAO.find_one_or_none(email=user_data.email, username=user_data.username)
+    existing_user = await UsersDAO.find_one_or_none(email=user_data.email)
     existing_user_by_username = await UsersDAO.find_one_or_none(username=user_data.username)
 
     if existing_user or existing_user_by_username:
@@ -31,8 +31,10 @@ async def register_user(response: Response, user_data: SUserReg):
         username=user_data.username,
         hashed_password=hashed_password
     )
-    access_token = await login_user_and_set_cookie(response, user_data.email, user_data.password)
 
+    access_token = await login_user_and_set_cookie(
+        response, user_data.email, user_data.password
+    )
     return f"Пользователь {user_data.email} успешно зарегистрирован"
 
 
@@ -43,7 +45,9 @@ async def login_user(response: Response, user_data: SUserLogin):
     if not user:
         raise IncorrectEmailOrPswException
 
-    access_token = await login_user_and_set_cookie(response, user_data.email, user_data.password)
+    access_token = await login_user_and_set_cookie(
+        response, user_data.email, user_data.password
+    )
     return access_token
 
 

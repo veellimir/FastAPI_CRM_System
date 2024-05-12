@@ -3,11 +3,10 @@ from datetime import date
 from fastapi import APIRouter, Depends
 
 from app.tasks.dao import TaskDAO
-from app.projects.dao import ProjectDAO
 from app.users.dependecies import current_user
 from app.users.models import Users
 
-from app.exeptions import TokenAbsentException
+from app.exceptions import TokenAbsentException
 
 router = APIRouter(
     prefix="/tasks",
@@ -86,6 +85,6 @@ async def get_task_current_user(user: Users = Depends(current_user)):
     "/project{project_id}",
     summary="получить список задач по проекту"
 )
-async def get_task_project(project_id: int):
+async def get_task_project(project_id: int, users: Users = Depends(current_user)):
     project = await TaskDAO.find_by_id(project_id)
     return project
