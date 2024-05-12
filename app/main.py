@@ -14,7 +14,7 @@ app = FastAPI(
 origins = [
     "localhost",
     "localhost:9000",
-    "https://crm-sistem-daniilkuns-projects.vercel.app/"
+    "https://crm-sistem-daniilkuns-projects.vercel.app"
     "http://localhost:5175",
 ]
 
