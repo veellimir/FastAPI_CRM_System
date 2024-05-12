@@ -27,8 +27,9 @@ async def get_all_users(users: Users = Depends(current_user)):
 
 
 @router.get(
-    "/current",
-    summary="получить текущего пользователя"
+    "/current{user_id}",
+    summary="получить текущего пользователя",
 )
-async def get_current_user(user: Users = Depends(current_user)):
+async def get_current_user(user_id: int, users: Users = Depends(current_user)):
+    user = await UsersDAO.find_by_id(model_id=user_id)
     return SGetUser(id=user.id, role_id=user.role_id, email=user.email)
