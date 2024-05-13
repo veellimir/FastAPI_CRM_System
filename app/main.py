@@ -6,6 +6,7 @@ from app.users_data.router import router as users_router
 from app.roles.router import router as roles_router
 from app.projects.router import router as projects_router
 from app.tasks.router import router as tasks_router
+from app.finance.router import router as finance_router
 
 app = FastAPI(
     title='CRM_system'
@@ -32,4 +33,5 @@ app.include_router(users_router)
 app.include_router(roles_router)
 app.include_router(projects_router)
 app.include_router(tasks_router)
+app.include_router(finance_router)
 

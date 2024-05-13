@@ -14,6 +14,7 @@ from app.database import Base, DATABASE_URL
 from app.users.models import Users, Roles
 from app.tasks.models import Tasks
 from app.projects.models import Projects, ProjectUserAssociation
+from app.finance.models import Finance, Profit
 
 
 
