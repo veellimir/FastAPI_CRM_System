@@ -50,4 +50,9 @@ class BaseDAO:
             await session.execute(query)
             await session.commit()
 
-
+    @classmethod
+    async def update(cls, model_id: int):
+        async with async_session_maker() as session:
+            async with session.begin():
+                await session.merge(model_id)
+                await session.commit()

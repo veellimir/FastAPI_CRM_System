@@ -5,3 +5,5 @@ venv
 .env-prod
 .env-non-dev
 app/tests
+user_image
+frontend_crm
