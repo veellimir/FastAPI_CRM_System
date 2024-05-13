@@ -19,3 +19,4 @@ class SGetUser(BaseModel):
     role_id: Optional[int]
     email: str
     username: str
+    user_image: Optional[str]
