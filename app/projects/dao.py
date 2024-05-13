@@ -25,6 +25,7 @@ class ProjectDAO(BaseDAO):
             await session.commit()
             return add_new_project.scalars()
 
+
 class ProjectUserDAO(BaseDAO):
     model = ProjectUserAssociation
 
