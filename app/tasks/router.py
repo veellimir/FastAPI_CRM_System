@@ -16,7 +16,7 @@ router = APIRouter(
 
 
 @router.post(
-    "/create/{name_task}/{date_create}/{deadline}",
+    "/create",
     summary="создать задачу",
 
 )
