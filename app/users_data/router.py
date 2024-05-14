@@ -18,7 +18,7 @@ router = APIRouter(
 
 
 @router.post(
-    "/profile_image/{user_id}",
+    "/profile_image",
     summary="загрузить изображения пользователя"
 )
 async def load_profile_image(
