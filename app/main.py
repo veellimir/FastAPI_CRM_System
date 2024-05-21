@@ -17,9 +17,9 @@ origins = [
     "localhost:9000",
     "https://crm-sistem-daniilkuns-projects.vercel.app",
     "https://crm-sistem-daniilkuns-projects.vercel.app/auth/login",
-    "http://localhost:5173/",
-    "http://localhost:5174/",
-    "http://localhost:5175/",
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:5175",
 ]
 
 app.add_middleware(
@@ -27,7 +27,7 @@ app.add_middleware(
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS", "DELETE", "PATCH", "PUT"],
-    allow_headers=["Content-type", "Set-Cookie", "Access-Control-Allow-Headers", "Access-Authorization", "Authorization"]
+    allow_headers=["Content-type", "Set-Cookie", "Access-Control-Allow-Headers", "Access-Authorization"]
 )
 
 app.include_router(auth_router)
