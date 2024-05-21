@@ -54,7 +54,7 @@ async def delete_profile_image(
     return "Изображения удалено"
 
 
-@router.get(
+@router.post(
     "/all",
     summary="получить список пользователей",
     response_model=List[SGetUser]
@@ -75,8 +75,8 @@ async def get_all_users(users: Users = Depends(current_user)):
     "/current",
     summary="получить текущего пользователя",
 )
-async def get_current_user(users: Users = Depends(current_user)):
-    user = await UsersDAO.find_one_or_none()
+async def get_current_user(user: Users = Depends(current_user)):
+    # user = await UsersDAO.find_one_or_none()
     return SGetUser(
         id=user.id,
         role_id=user.role_id,

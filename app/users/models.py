@@ -22,7 +22,7 @@ class Users(Base):
     email = Column(String, nullable=False)
     hashed_password = Column(String, nullable=False)
     username = Column(String, nullable=False, unique=True)
-    user_image = Column(String)
+    user_image = Column(String, nullable=True)
     role_id = Column(Integer, ForeignKey(Roles.id))
 
     role = relationship("Roles", back_populates="user")
