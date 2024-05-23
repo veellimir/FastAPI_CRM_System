@@ -59,7 +59,7 @@ async def delete_profile_image(
     summary="получить список пользователей",
     response_model=List[SGetUser]
 )
-async def get_all_users(users: Users = Depends(current_user)):
+async def get_all_users(user: Users = Depends(current_user)):
     users = await UsersDAO.find_all()
     return [
         SGetUser(
@@ -76,7 +76,6 @@ async def get_all_users(users: Users = Depends(current_user)):
     summary="получить текущего пользователя",
 )
 async def get_current_user(user: Users = Depends(current_user)):
-    # user = await UsersDAO.find_one_or_none()
     return SGetUser(
         id=user.id,
         role_id=user.role_id,

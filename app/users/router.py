@@ -3,7 +3,7 @@ from fastapi import APIRouter, Response
 from app.users.schemes import SUserReg, SUserLogin
 from app.users.dao import UsersDAO
 
-from app.users.auth import get_password_hashed, authenticated_user, login_user_and_set_cookie
+from app.users.auth import get_password_hashed, authenticated_user, create_access_token
 
 from app.exeptions import UserAlreadyExistsException, IncorrectEmailOrPswException
 
@@ -32,10 +32,10 @@ async def register_user(response: Response, user_data: SUserReg):
         hashed_password=hashed_password
     )
 
-    access_token = await login_user_and_set_cookie(
-        response, user_data.email, user_data.password
-    )
-    return access_token
+    # access_token = await login_user_and_set_cookie(
+    #     response, user_data.email, user_data.password
+    # )
+    return f"Пользователь {user_data.username} зарегистрирован"
 
 
 @router.post("/login", summary="войти")
@@ -45,9 +45,8 @@ async def login_user(response: Response, user_data: SUserLogin):
     if not user:
         raise IncorrectEmailOrPswException
 
-    access_token = await login_user_and_set_cookie(
-        response, user_data.email, user_data.password
-    )
+    access_token = create_access_token({"sub": str(user.id)})
+    response.set_cookie("crm_system_access_token", access_token, httponly=True, secure=True)
     return access_token
 
 
